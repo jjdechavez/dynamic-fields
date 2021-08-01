@@ -1,12 +1,27 @@
 import React from "react";
 import { useFieldArray } from "react-hook-form";
-import NestedCheckBox from './nestedCheckBox';
+import Option from './Option';
 
 export default ({ nestIndex, control, register }) => {
   const { fields, remove, append } = useFieldArray({
     control,
     name: `template.${nestIndex}.questions`
   });
+
+  const handleAppendShortAnswerField = () => 
+    append({
+      title: "New Question",
+      type: "short-answer",
+      answer: ""
+    });
+
+  const handleAppendMultipleChoiceField = () => 
+    append({
+      title: "New Question For Multiple Choice",
+      type: "multiple-choice",
+      options: [{ name: "" }],
+      answer: ""
+    })
 
   const renderFields = (fields) => {
     return fields.map((field, k) => {
@@ -34,6 +49,7 @@ export default ({ nestIndex, control, register }) => {
               </button>
             </div>
           )
+
         case 'multiple-choice':
           return (
             <div key={field.id} style={{ marginLeft: 20, marginBottom: "1rem" }}>
@@ -46,7 +62,7 @@ export default ({ nestIndex, control, register }) => {
               />
               <br />
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <NestedCheckBox
+                  <Option
                     nestIndex={nestIndex}
                     nestedFieldIndex={k}
                     {...{ control, register }}
@@ -73,27 +89,14 @@ export default ({ nestIndex, control, register }) => {
 
       <button
         type="button"
-        onClick={() =>
-          append({
-            title: "field1",
-            type: "short-answer",
-            answer: ""
-          })
-        }
+        onClick={handleAppendShortAnswerField}
       >
         Append Question
       </button>
 
       <button
         type="button"
-        onClick={() =>
-          append({
-            title: "field1",
-            type: "multiple-choice",
-            options: [{ name: "First option" }],
-            answer: ""
-          })
-        }
+        onClick={handleAppendMultipleChoiceField}
       >
         Append Multiple Choice
       </button>

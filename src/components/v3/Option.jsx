@@ -7,6 +7,11 @@ export default ({ nestIndex, nestedFieldIndex, control, register }) => {
     name: `template.${nestIndex}.questions.${nestedFieldIndex}.options`
   });
 
+  const handleAppendOptionField = () => 
+    append({
+      name: "Option name"
+    });
+
   return (
     <div style={{ marginBottom: "1rem" }}>
       {fields.map((field, index) => (
@@ -30,13 +35,10 @@ export default ({ nestIndex, nestedFieldIndex, control, register }) => {
           </button>
         </div>
       ))}
+
       <button
         type="button"
-        onClick={() =>
-        append({
-          name: "Option name"
-        })
-        }
+        onClick={handleAppendOptionField}
       >
         Append Option
       </button>

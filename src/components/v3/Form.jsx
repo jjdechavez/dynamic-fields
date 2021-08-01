@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import FieldArray from './fieldArray'
+import Section from './Section'
 
 const defaultValues = {
   template: [
@@ -29,14 +29,12 @@ const FormV3 = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FieldArray
+      <Section
         {...{ control, register, defaultValues, getValues, setValue, errors }}
       />
-
       <button type="button" onClick={() => reset(defaultValues)}>
         Reset
       </button>
-
       <input type="submit" />
     </form>
   );

@@ -1,10 +1,10 @@
 import React from "react";
 import { useFieldArray } from "react-hook-form";
-import NestedArray from "./nestedFieldArray";
+import Question from "./Question";
 
 let renderCount = 0;
 
-export default function Fields({ control, register, setValue, getValues }) {
+export default function Section({ control, register, setValue, getValues }) {
   const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "template"
@@ -27,7 +27,7 @@ export default function Fields({ control, register, setValue, getValues }) {
               <button type="button" onClick={() => remove(index)} style={{ marginBottom: "1rem" }}>
                 Delete
               </button>
-              <NestedArray nestIndex={index} {...{ control, register }} />
+              <Question nestIndex={index} {...{ control, register }} />
             </li>
           );
         })}
